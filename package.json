@@ -1,0 +1,19 @@
+{
+  "name": "oauth",
+  "version": "1.0.0",
+  "description": "login system web app",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/who-0/Oauth.git"
+  },
+  "author": "DaDDy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/who-0/Oauth/issues"
+  },
+  "homepage": "https://github.com/who-0/Oauth#readme"
+}
