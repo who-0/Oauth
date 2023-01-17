@@ -16,7 +16,7 @@ const verifyCallback = (accessToken, refreshToken, profile, done) => {
   done(null, profile);
 };
 
-const Google = (passport) => {
+module.exports = (passport) => {
   passport.use(new Strategy(AUTH_OPTIONS, verifyCallback));
 };
 
@@ -27,5 +27,3 @@ passport.serializeUser((user, done) => {
 passport.deserializeUser((id, done) => {
   done(null, id);
 });
-
-module.exports = Google;

@@ -1,11 +1,13 @@
 const express = require("express");
+const checkLogin = require("../middlewares/verify.middleware");
 const authRouter = require("./auth.router");
 const homeRouter = require("./home.router");
 const api = express.Router();
 
-api.use("/home", homeRouter);
+api.use("/home", checkLogin, homeRouter);
 api.use("/auth", authRouter);
-api.get("/*", (req, res) => {
-  return res.send("your requrest is not defined in our system");
+api.get("*", (req, res) => {
+  return res.redirect("/auth/error");
 });
+
 module.exports = api;

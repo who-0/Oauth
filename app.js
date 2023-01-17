@@ -7,27 +7,25 @@ const helmet = require("helmet");
 const cors = require("cors");
 const app = express();
 const api = require("./routes/api");
-const google = require("./config/passport");
+require("./config/passport")(passport);
 
 //!---middleware---
 
 app.set("view engine", "ejs");
-app.use(express.static(path.join(__dirname, "public")));
-app.use(morgan("tiny"));
-app.use(helmet());
-app.use(cors({ origin: "http://localhost:3000" }));
-app.use(api);
 app.use(
   session({
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: true },
-    maxAge: 24 * 60 * 60 * 1000,
-    secret: [process.env.COOKIE_KEY_1, process.env.COOKIE_KEY_2],
+    secret: process.env.COOKIE_KEY_1,
   })
 );
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, "public")));
+app.use(morgan("tiny"));
+app.use(helmet());
+app.use(cors({ origin: "http://localhost:3000" }));
 app.use(passport.initialize());
 app.use(passport.session());
-google(passport);
+app.use(api);
 
 module.exports = app;
