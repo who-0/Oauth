@@ -6,6 +6,9 @@ const api = express.Router();
 
 api.use("/home", checkLogin, homeRouter);
 api.use("/auth", authRouter);
+api.get("/", checkLogin, (req, res) => {
+  return res.send("hello world");
+});
 api.get("*", (req, res) => {
   return res.redirect("/auth/error");
 });
