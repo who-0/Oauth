@@ -7,11 +7,13 @@ const helmet = require("helmet");
 const cors = require("cors");
 const app = express();
 const api = require("./routes/api");
-const google = require("./config/passport");
+require("./config/passport")(passport);
 
 //!---middleware---
 
 app.set("view engine", "ejs");
+
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(morgan("tiny"));
 app.use(helmet());
@@ -28,6 +30,5 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session());
-google(passport);
 
 module.exports = app;
