@@ -20,11 +20,9 @@ authRouter.get(
   "/google/callback",
   passport.authenticate("google", {
     failureRedirect: "/auth/error",
-    successRedirect: "/home",
-    session: true,
   }),
   (req, res) => {
-    console.log("google is call back");
+    return res.redirect("/home");
   }
 );
 authRouter.get("/error", (req, res) => {

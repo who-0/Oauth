@@ -15,7 +15,8 @@ const AUTH_OPTIONS = {
 const verifyCallback = (accessToken, refreshToken, profile, done) => {
   done(null, profile);
 };
-module.exports = (passport) => {
+
+const Google = (passport) => {
   passport.use(new Strategy(AUTH_OPTIONS, verifyCallback));
 };
 
