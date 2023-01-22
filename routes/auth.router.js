@@ -29,4 +29,9 @@ authRouter.get("/error", (req, res) => {
   res.send("something wrong");
 });
 
+// authRouter.get("/logout", (req, res) => {
+//   req.logout();
+//   return res.render("login");
+// });
+
 module.exports = authRouter;
