@@ -1,11 +1,8 @@
-const { model } = require("mongoose");
 const { Strategy } = require("passport-google-oauth20");
-const { findUser, addUser, findById } = require("../models/users.model");
+const { findUser, addUser } = require("../models/users.model");
 const config = {
   CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
   CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
-  COOKIE_KEY_1: process.env.COOKIE_KEY_1,
-  COOKIE_KEY_2: process.env.COOKIE_KEY_2,
 };
 const AUTH_OPTIONS = {
   callbackURL: "/auth/google/callback",
@@ -18,11 +15,7 @@ const AUTH_OPTIONS = {
 function google(passport) {
   passport.use(
     new Strategy(
-      {
-        clientID: process.env.GOOGLE_CLIENT_ID,
-        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-        callbackURL: "/auth/google/callback",
-      },
+      AUTH_OPTIONS,
       async (accessToken, refreshToken, profile, done) => {
         const newUser = {
           googleId: profile.id,
@@ -58,4 +51,4 @@ function google(passport) {
     done(null, id);
   });
 }
-module.exports = { google };
+module.exports = google;

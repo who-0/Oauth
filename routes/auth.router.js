@@ -23,6 +23,19 @@ authRouter.get(
 );
 //! Github -------------------------
 
+authRouter.get("/github", passport.authenticate("github", { scope: ["user"] }));
+
+authRouter.get(
+  "/github/callback",
+  passport.authenticate(
+    "github",
+    { failureRedirect: "/auth/error" },
+    (req, res) => {
+      return res.redirect("/");
+    }
+  )
+);
+
 authRouter.get("/error", (req, res) => {
   res.send("something wrong");
 });

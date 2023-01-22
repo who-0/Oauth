@@ -7,12 +7,14 @@ const helmet = require("helmet");
 const cors = require("cors");
 const app = express();
 const api = require("./routes/api");
-const { google } = require("./config/google.passport");
+const google = require("./config/google.passport");
+const github = require("./config/github.passport");
 
 //!---middleware---
 
 app.set("view engine", "ejs");
 google(passport);
+github(passport);
 app.use(
   session({
     resave: false,
