@@ -7,9 +7,13 @@ const api = express.Router();
 api.use("/profile", checkLogin, profileRouter);
 api.use("/auth", authRouter);
 api.get("/", checkLogin, async (req, res) => {
-  // console.log(req.user);
-  // return res.json(200).json(req.user);
   return res.render("home");
+});
+api.get("/cookie", (req, res) => {
+  return res.render("cookie");
+});
+api.get("/privacy", (req, res) => {
+  return res.render("privacy");
 });
 api.get("*", (req, res) => {
   return res.redirect("/auth/error");
