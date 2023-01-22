@@ -9,11 +9,10 @@ const addUser = async (newUser) =>
   });
 
 const findById = async (id) => {
-  return await Users.findById(id);
+  return await Users.findById(id, { _id: 0, __v: 0 });
 };
 module.exports = {
   findUser,
   addUser,
   findById,
 };
-

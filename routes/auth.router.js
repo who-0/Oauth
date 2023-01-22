@@ -5,11 +5,7 @@ const authRouter = express.Router();
 authRouter.get("/login", (req, res) => {
   return res.render("login");
 });
-
-authRouter.get("/signup", (req, res) => {
-  return res.render("signup");
-});
-
+//! Google ---------------
 authRouter.get(
   "/google",
   passport.authenticate("google", {
@@ -25,13 +21,19 @@ authRouter.get(
     return res.redirect("/");
   }
 );
+//! Github -------------------------
+
 authRouter.get("/error", (req, res) => {
   res.send("something wrong");
 });
 
-// authRouter.get("/logout", (req, res) => {
-//   req.logout();
-//   return res.render("login");
-// });
+authRouter.get("/logout", (req, res) => {
+  req.logout(function (err) {
+    if (err) {
+      return next(err);
+    }
+    return res.render("login");
+  });
+});
 
 module.exports = authRouter;

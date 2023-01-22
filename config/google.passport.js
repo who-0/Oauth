@@ -1,3 +1,4 @@
+const { model } = require("mongoose");
 const { Strategy } = require("passport-google-oauth20");
 const { findUser, addUser, findById } = require("../models/users.model");
 const config = {
@@ -12,60 +13,9 @@ const AUTH_OPTIONS = {
   clientSecret: config.CLIENT_SECRET,
 };
 
-// const verifyCallback = async (accessToken, refreshToken, profile, done) => {
-//   // const newUser = {
-//   //   googleId: profile.id,
-//   //   username: profile.displayName,
-//   //   img: profile.photos[0].value,
-//   //   email: profile.emails[0].value,
-//   // };
-//   // //todo console.log("newUser", newUser);
-//   // let user = await findUser(newUser.googleId);
-//   // //todo console.log("Exist User", user);
-//   // if (user) {
-//   //   done(null, user);
-//   // } else {
-//   //   user = await addUser(newUser);
-//   //   console.log(user);
-//   //   done(null, user);
-//   // }
-//   const newUser = {
-//     googleId: profile.id,
-//     displayName: profile.displayName,
-//     image: profile.photos[0].value,
-//     email: profile.emails[0].value,
-//   };
-//   try {
-//     let user = await findUser(newUser.googleId);
-
-//     if (user) {
-//       //If user present in our database.
-//       done(null, user);
-//     } else {
-//       // if user is not preset in our database save user data to database.
-//       user = await addUser(newUser);
-//       done(null, user);
-//     }
-//   } catch (err) {
-//     console.error(err);
-//   }
-// };
-
-// passport.serializeUser((user, done) => {
-//   console.log(user);
-//   done(null, user.id);
-// });
-
-// passport.deserializeUser((id, done) => {
-//   findUser(id, (err, user) => done(err, user));
-// });
-
-// module.exports = (passport) => {
-//   passport.use(new Strategy(AUTH_OPTIONS, verifyCallback));
-// };
 //!--------------------------------------------------------------------------
 
-module.exports = function (passport) {
+function google(passport) {
   passport.use(
     new Strategy(
       {
@@ -98,6 +48,7 @@ module.exports = function (passport) {
       }
     )
   );
+
   passport.serializeUser((user, done) => {
     done(null, user.id);
   });
@@ -106,4 +57,5 @@ module.exports = function (passport) {
   passport.deserializeUser((id, done) => {
     done(null, id);
   });
-};
+}
+module.exports = { google };

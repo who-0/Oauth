@@ -10,6 +10,16 @@
 
 <body>
     <h1>Profile page</h1>
+    <ul>
+        <li>Name:<%= user.displayName %>
+        </li>
+        <li>Create Time: <%= user.createdAt %>
+        </li>
+        <li>Email: <%= user.email %>
+        </li>
+        <li><img crossorigin="anonymous" src=<%=user.image %> alt="profile" /></li>
+    </ul>
+
     <p>Logout <a href="/auth/logout">X</a></p>
 </body>
 
