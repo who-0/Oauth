@@ -6,7 +6,9 @@ const api = express.Router();
 
 api.use("/home", checkLogin, homeRouter);
 api.use("/auth", authRouter);
-api.get("/", checkLogin, (req, res) => {
+api.get("/", checkLogin, async (req, res) => {
+  // console.log(req.user);
+  // return res.json(200).json(req.user);
   return res.send("hello world");
 });
 api.get("*", (req, res) => {

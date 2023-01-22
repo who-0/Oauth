@@ -22,7 +22,7 @@ authRouter.get(
     failureRedirect: "/auth/error",
   }),
   (req, res) => {
-    return res.redirect("/home");
+    return res.redirect("/");
   }
 );
 authRouter.get("/error", (req, res) => {

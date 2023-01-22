@@ -1,8 +1,7 @@
 const checkLogin = (req, res, next) => {
-  console.log(req.user);
-  console.log(req.isAuthenticated());
   if (req.isAuthenticated()) {
-    next();
+    console.log(req.user);
+    return next();
   } else {
     return res.redirect("/auth/login");
   }
