@@ -3,8 +3,12 @@ const jwt = require("jsonwebtoken");
 const Cookie_R = process.env.COOKIE_KEY_R;
 const httpGetProfile = async (req, res) => {
   const { refreshToken } = req.cookies;
-  const userId = jwt.verify(refreshToken, Cookie_R);
-  const id = req.user || userId.id;
+  let id;
+  if (refreshToken) {
+    id = jwt.verify(refreshToken, Cookie_R).id;
+  } else {
+    id = req.user;
+  }
   const e_user = await findById(id);
   return res.render("profile", { user: e_user });
 };

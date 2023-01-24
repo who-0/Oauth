@@ -11,9 +11,7 @@ const addUser = async (newUser) =>
     new: true,
   });
 
-const findById = async (id) => {
-  return await Users.findById(id, { _id: 0, __v: 0 });
-};
+const findById = async (id) => await Users.findById(id, { _id: 0, __v: 0 });
 
 const findUserId = async () => {
   const lastestId = await Users.find({});

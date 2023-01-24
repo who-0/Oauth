@@ -26,57 +26,63 @@ const httpGithubCallback = (req, res) => {
 };
 
 //! User account ------------------------------
+//? Signup user--------------------------------
 const httpUserSignup = async (req, res) => {
   const user = req.body;
-  console.log("user", user);
   if (!user) {
     res.redirect("/error");
-    console.log("user error");
   } else if (!user.uname || !user.pwd || !user.email) {
-    console.log("input error");
     res.redirect("/error");
   } else {
     const e_user = await findUserWithEmail(user.email);
     if (e_user) {
-      console.log("euser error");
       res.redirect("/error");
     } else {
-      const hashPassword = await bcrypt.hash(user.pwd, 8);
-      console.log("hashpassowr", hashPassword);
-      const newId = (await findUserId()) + 1;
-      console.log("newId", newId);
-      const newUser = {
-        userId: newId,
-        username: user.uname,
-        email: user.email,
-        password: hashPassword,
-      };
-      console.log("newuser", newUser);
-      const c_user = await addUser(newUser);
-      console.log("c_user", c_user);
-      const accessToken = jwt.sign(
-        { id: c_user.id, email: user.email },
-        COOKIE_KEY_1,
-        {
-          expiresIn: "1m",
+      try {
+        const hashPassword = await bcrypt.hash(user.pwd, 8);
+        const newId = (await findUserId()) + 1;
+        const newUser = {
+          userId: newId,
+          username: user.uname,
+          email: user.email,
+          password: hashPassword,
+        };
+        const c_user = await addUser(newUser);
+        if (!c_user) {
+          res.redirect("/error");
+        } else {
+          const accessToken = jwt.sign(
+            { id: c_user.id, email: user.email },
+            COOKIE_KEY_1,
+            {
+              expiresIn: "1m",
+            }
+          );
+          const refreshToken = jwt.sign(
+            { id: c_user.id, email: user.email },
+            COOKIE_KEY_R
+          );
+          res.cookie("accessToken", accessToken, { httpOnly: true });
+          res.cookie("refreshToken", refreshToken, { httpOnly: true });
+          res.redirect("/");
         }
-      );
-      const refreshToken = jwt.sign(
-        { id: c_user.id, email: user.email },
-        COOKIE_KEY_R
-      );
-      res.cookie("accessToken", accessToken, { httpOnly: true });
-      res.cookie("refreshToken", refreshToken, { httpOnly: true });
-      res.redirect("/");
+      } catch (error) {
+        console.error(error);
+        res.redirect("/error");
+      }
     }
   }
 };
 
+//? Login user--------------------------------
 const httpUserLogin = (req, res) => {
-  const user = req.body;
-
-  return res.status(200).json(user);
+  const { email, pwd } = req.body;
+  const foundUser = findUserWithEmail(email);
+  console.log(foundUser);
+  return res.status(200).json(foundUser);
 };
+
+//!----------------------------------------------------------------------
 
 const httpError = (req, res) => {
   res.send("something wrong");
@@ -87,6 +93,9 @@ const httpLogout = (req, res) => {
     if (err) {
       return next(err);
     }
+    res.clearCookie("connect.sid");
+    res.clearCookie("accessToken");
+    res.clearCookie("refreshToken");
     return res.render("login");
   });
 };
