@@ -1,10 +1,7 @@
 const express = require("express");
 const profileRouter = express.Router();
 const { findById } = require("../models/users.model");
+const { httpGetProfile } = require("../controllers/profile.controller");
 
-profileRouter.get("/", async (req, res) => {
-  const e_user = await findById(req.user);
-  return res.render("profile", { user: e_user });
-});
-
+profileRouter.get("/", httpGetProfile);
 module.exports = profileRouter;

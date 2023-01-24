@@ -16,13 +16,13 @@ function github(passport) {
       async (accessToken, refreshToken, profile, done) => {
         try {
           const newUser = {
-            googleId: profile.id,
-            displayName: profile.username,
+            userId: profile.id,
+            username: profile.username,
             image: profile.photos[0].value,
             email: profile.emails[0].value,
           };
 
-          let user = await findUser(newUser.googleId);
+          let user = await findUser(newUser.userId);
           if (user) {
             done(null, user);
           } else {

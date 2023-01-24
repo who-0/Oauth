@@ -1,7 +1,9 @@
 const path = require("path");
 const express = require("express");
+const bdparser = require("body-parser");
 const passport = require("passport");
 const session = require("express-session");
+const cookie = require("cookie-parser");
 const morgan = require("morgan");
 const helmet = require("helmet");
 const cors = require("cors");
@@ -13,6 +15,9 @@ const github = require("./config/github.passport");
 //!---middleware---
 
 app.set("view engine", "ejs");
+app.use(bdparser.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(cookie());
 google(passport);
 github(passport);
 app.use(
@@ -22,7 +27,6 @@ app.use(
     secret: process.env.COOKIE_KEY_1,
   })
 );
-app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(morgan("tiny"));
 app.use(helmet());

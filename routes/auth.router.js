@@ -1,10 +1,20 @@
 const express = require("express");
 const passport = require("passport");
 const authRouter = express.Router();
+const {
+  httpGetLogin,
+  httpGetSignup,
+  httpGoogleCallback,
+  httpGithubCallback,
+  httpUserSignup,
+  httpUserLogin,
+  httpError,
+  httpLogout,
+} = require("../controllers/auth.controller");
 
-authRouter.get("/login", (req, res) => {
-  return res.render("login");
-});
+authRouter.get("/login", httpGetLogin);
+
+authRouter.get("/signup", httpGetSignup);
 //! Google ---------------
 authRouter.get(
   "/google",
@@ -17,9 +27,7 @@ authRouter.get(
   passport.authenticate("google", {
     failureRedirect: "/auth/error",
   }),
-  (req, res) => {
-    return res.redirect("/");
-  }
+  httpGoogleCallback
 );
 //! Github -------------------------
 
@@ -28,22 +36,16 @@ authRouter.get("/github", passport.authenticate("github", { scope: ["user"] }));
 authRouter.get(
   "/github/callback",
   passport.authenticate("github", { failureRedirect: "/auth/error" }),
-  (req, res) => {
-    return res.redirect("/");
-  }
+  httpGithubCallback
 );
 
-authRouter.get("/error", (req, res) => {
-  res.send("something wrong");
-});
+//! Signup User account ------------------------------
+authRouter.post("/signup", httpUserSignup);
 
-authRouter.get("/logout", (req, res) => {
-  req.logout(function (err) {
-    if (err) {
-      return next(err);
-    }
-    return res.render("login");
-  });
-});
+authRouter.post("/login", httpUserLogin);
+
+authRouter.get("/error", httpError);
+
+authRouter.get("/logout", httpLogout);
 
 module.exports = authRouter;

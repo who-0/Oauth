@@ -18,14 +18,14 @@ function google(passport) {
       AUTH_OPTIONS,
       async (accessToken, refreshToken, profile, done) => {
         const newUser = {
-          googleId: profile.id,
-          displayName: profile.displayName,
+          userId: profile.id,
+          username: profile.displayName,
           image: profile.photos[0].value,
           email: profile.emails[0].value,
         };
         try {
           // let user = await User.findOne({ googleId: profile.id });
-          let user = await findUser(newUser.googleId);
+          let user = await findUser(newUser.userId);
           if (user) {
             //If user present in our database.
             done(null, user);

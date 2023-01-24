@@ -1,16 +1,17 @@
 const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema({
-  googleId: {
+  userId: {
     require: true,
     type: String,
   },
-  displayName: {
+  username: {
     require: true,
     type: String,
   },
   image: {
     type: String,
+    default: "/img/user.png",
   },
   email: {
     require: true,

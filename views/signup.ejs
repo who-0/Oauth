@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SignUp</title>
+</head>
+
+<body>
+    <h1>Signup page</h1>
+    <a href="/auth/google" style="color: green;">login with google</a>
+    <a href="/auth/github" style="color: black;">login with github</a>
+    <div class="singup_container">
+        <form action="/auth/signup" method="post" enctype="application/x-www-form-urlencoded">
+            <input type="text" name="uname" id="unmae" placeholder="Eneter User">
+            <input type="email" name="email" id="email" placeholder="Eneter Email">
+            <input type="password" name="pwd" id="pwd" placeholder="Eneter Password">
+            <button style="color: red;" type="submit">login with User account</button>
+        </form>
+    </div>
+    <a href="/auth/login" style="color: lightblue;">Login with User account</a>
+</body>
+
+</html>
