@@ -16,7 +16,7 @@ const github = require("./config/github.passport");
 
 app.set("view engine", "ejs");
 app.use(bdparser.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "..", "public")));
 app.use(cors({ origin: "http://localhost:3000" }));
 app.use(express.json());
 app.use(morgan("tiny"));
