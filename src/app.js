@@ -15,6 +15,7 @@ const github = require("./config/github.passport");
 //!---middleware---
 
 app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "..", "views"));
 app.use(bdparser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "..", "public")));
 app.use(cors({ origin: "http://localhost:3000" }));
