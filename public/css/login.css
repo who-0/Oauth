@@ -1,0 +1,42 @@
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inconsolata:wght@300&display=swap");
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login_container {
+  border: 1px solid black;
+  text-align: center;
+  padding: 3%;
+}
+.login_container h1 {
+  font-family: "Comfortaa", cursive;
+  margin-bottom: 20%;
+}
+
+.login_container .login_form form {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.login_container .login_form form > * {
+  margin: 3% 2%;
+  width: 100%;
+}
+.login_container .login_form form input {
+  height: 30px;
+}
+.login_container .login_form form button {
+  height: 45px;
+}
+.login_container .login_form .signup_cs {
+  font-size: 0.8rem;
+  font-family: "Inconsolata", monospace;
+}
