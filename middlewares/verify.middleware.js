@@ -1,7 +1,23 @@
+const jwt = require("jsonwebtoken");
 const checkLogin = (req, res, next) => {
   const { accessToken } = req.cookies;
   if (req.isAuthenticated() || accessToken) {
-    return next();
+    if (accessToken) {
+      jwt.verify(accessToken, process.env.COOKIE_KEY_1, (err, data) => {
+        if (err) {
+          if (err.message === "jwt expire") {
+            res.redirect("/refresh");
+          } else {
+            res.redirect("/error");
+          }
+        } else {
+          req.data = data;
+          return next();
+        }
+      });
+    } else {
+      return next();
+    }
   } else {
     return res.redirect("/auth/login");
   }

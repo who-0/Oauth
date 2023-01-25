@@ -75,11 +75,39 @@ const httpUserSignup = async (req, res) => {
 };
 
 //? Login user--------------------------------
-const httpUserLogin = (req, res) => {
+const httpUserLogin = async (req, res) => {
   const { email, pwd } = req.body;
-  const foundUser = findUserWithEmail(email);
-  console.log(foundUser);
-  return res.status(200).json(foundUser);
+  const foundUser = await findUserWithEmail(email);
+  if (!foundUser) {
+    res.redirect("/error");
+  } else if (foundUser.password === "oauth") {
+    res.redirect("/");
+  } else {
+    try {
+      const solvepwd = bcrypt.compare(pwd, foundUser.password);
+      if (solvepwd) {
+        const accessToken = jwt.sign(
+          { id: foundUser.id, email },
+          COOKIE_KEY_1,
+          {
+            expiresIn: "1m",
+          }
+        );
+        const refreshToken = jwt.sign(
+          { id: foundUser.id, email },
+          COOKIE_KEY_R
+        );
+        res.cookie("accessToken", accessToken, { httpOnly: true });
+        res.cookie("refreshToken", refreshToken, { httpOnly: true });
+        res.redirect("/");
+      } else {
+        res.redirect("/error");
+      }
+    } catch (error) {
+      console.error(error);
+      res.redirect("/error");
+    }
+  }
 };
 
 //!----------------------------------------------------------------------
