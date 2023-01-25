@@ -5,8 +5,8 @@ const checkLogin = (req, res, next) => {
     if (accessToken) {
       jwt.verify(accessToken, process.env.COOKIE_KEY_1, (err, data) => {
         if (err) {
-          if (err.message === "jwt expire") {
-            res.redirect("/refresh");
+          if (err.message === "jwt expired") {
+            res.redirect("/auth/refresh");
           } else {
             res.redirect("/error");
           }

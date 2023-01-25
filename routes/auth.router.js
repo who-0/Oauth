@@ -8,6 +8,7 @@ const {
   httpGithubCallback,
   httpUserSignup,
   httpUserLogin,
+  httpRefresh,
   httpError,
   httpLogout,
 } = require("../controllers/auth.controller");
@@ -43,6 +44,10 @@ authRouter.get(
 authRouter.post("/signup", httpUserSignup);
 
 authRouter.post("/login", httpUserLogin);
+
+authRouter.get("/refresh", httpRefresh);
+
+//!----------------------------
 
 authRouter.get("/error", httpError);
 
