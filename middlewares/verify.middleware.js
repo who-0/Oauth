@@ -8,7 +8,7 @@ const checkLogin = (req, res, next) => {
           if (err.message === "jwt expired") {
             res.redirect("/auth/refresh");
           } else {
-            res.redirect("/error");
+            res.render("error", { message: "Please Login again" });
           }
         } else {
           req.data = data;

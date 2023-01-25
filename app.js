@@ -16,7 +16,11 @@ const github = require("./config/github.passport");
 
 app.set("view engine", "ejs");
 app.use(bdparser.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, "public")));
+app.use(cors({ origin: "http://localhost:3000" }));
 app.use(express.json());
+app.use(morgan("tiny"));
+app.use(helmet());
 app.use(cookie());
 google(passport);
 github(passport);
@@ -27,9 +31,6 @@ app.use(
     secret: process.env.COOKIE_KEY_1,
   })
 );
-app.use(express.static(path.join(__dirname, "public")));
-app.use(morgan("tiny"));
-app.use(helmet());
 app.use(
   helmet.contentSecurityPolicy({
     useDefaults: true,
@@ -39,7 +40,6 @@ app.use(
     },
   })
 );
-app.use(cors({ origin: "http://localhost:3000" }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(api);
