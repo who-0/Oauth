@@ -12,35 +12,35 @@ body {
   align-items: center;
 }
 
-.login_container {
+.signup_container {
   width: 25%;
   border: 1px solid black;
   text-align: center;
   padding: 2%;
 }
 
-.login_container h1 {
+.signup_container h1 {
   font-family: "Comfortaa", cursive;
   margin-bottom: 20%;
 }
 
-.login_container .login_form {
+.signup_container .signup_form {
   width: 100%;
 }
 
-.login_container .login_form form {
+.signup_container .signup_form form {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
 }
 
-.login_container .login_form form > * {
+.signup_container .signup_form form > * {
   margin: 3% 2%;
   width: 100%;
 }
 
-.login_container .login_form form input {
+.signup_container .signup_form form input {
   height: 35px;
   padding-left: 3%;
   font-size: 1rem;
@@ -50,7 +50,7 @@ body {
   font-family: "Roboto Mono", monospace;
 }
 
-.login_container .login_form form button {
+.signup_container .signup_form form button {
   height: 45px;
   font-size: 1.2rem;
   letter-spacing: 1px;
@@ -60,19 +60,19 @@ body {
   background-color: rgb(65, 223, 65);
 }
 
-.login_container .login_form .signup_cs {
+.signup_container .signup_form .login_cs {
   margin: 8% auto;
   font-size: 0.8rem;
   font-family: "Inconsolata", monospace;
 }
 
-.login_container .btn_cs {
+.signup_container .btn_cs {
   display: flex;
   justify-content: space-around;
   align-items: center;
 }
 
-.login_container .btn_cs a {
+.signup_container .btn_cs a {
   width: 40%;
   display: flex;
   justify-content: space-evenly;
@@ -83,22 +83,22 @@ body {
   border: 1px solid black;
 }
 
-.login_container .btn_cs img {
+.signup_container .btn_cs img {
   width: 30px;
 }
 
 @media (max-width: 769px) {
-  .login_container {
+  .signup_container {
     width: 80%;
     padding: 4%;
   }
-  .login_container .btn_cs img {
+  .signup_container .btn_cs img {
     width: 25px;
   }
-  .login_container .btn_cs p {
+  .signup_container .btn_cs p {
     font-size: 14px;
   }
-  .login_container h1 {
+  .signup_container h1 {
     font-size: 35px;
   }
 }

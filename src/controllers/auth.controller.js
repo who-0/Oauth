@@ -76,8 +76,8 @@ const httpUserLogin = async (req, res) => {
     res.render("error", {
       message: "Your account doesn't found in our system.",
     });
-  } else if (foundUser.password === "oauth") {
-    res.redirect("/");
+  } else if (!foundUser.password) {
+    res.render("error", { message: "You must choice correct login way!" });
   } else {
     try {
       const solvepwd = await bcrypt.compare(pwd, foundUser.password);
