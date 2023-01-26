@@ -21,7 +21,15 @@ body {
 
 .signup_container h1 {
   font-family: "Comfortaa", cursive;
-  margin-bottom: 20%;
+  margin-bottom: 10%;
+}
+
+.signup_container .signup_error {
+  /* display: none; */
+  border: 1px solid red;
+  color: red;
+  padding: 5% 0;
+  font-family: "Roboto Mono", monospace;
 }
 
 .signup_container .signup_form {

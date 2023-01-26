@@ -6,21 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
+    <link rel="stylesheet" href="/css/profile.css" type="text/css">
 </head>
 
 <body>
-    <h1>Profile page</h1>
-    <ul>
-        <li>Name:<%= user.username %>
-        </li>
-        <li>Create Time: <%= user.createdAt %>
-        </li>
-        <li>Email: <%= user.email %>
-        </li>
-        <li><img crossorigin="anonymous" src=<%=user.image %> alt="profile" /></li>
-    </ul>
-
-    <p>Logout <a href="/auth/logout">X</a></p>
+    <div class="profile_container">
+        <img src="/img/user.png" alt="user">
+        <div class="user_data">
+            <h1>paing sett kyaw</h1>
+            <p class="email">paing@gmail.com</p>
+            <p class="time">2023-01-25T09:43:48.313+00:00</p>
+        </div>
+    </div>
 </body>
 
 </html>

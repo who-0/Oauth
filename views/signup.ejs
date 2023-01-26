@@ -12,25 +12,30 @@
 <body>
     <div class="signup_container">
         <h1>Signup page</h1>
-        <div class="signup_form">
-            <form action="/auth/signup" method="post" enctype="application/x-www-form-urlencoded">
-                <input type="text" name="uname" id="unmae" placeholder="Eneter User">
-                <input type="email" name="email" id="email" placeholder="Eneter Email">
-                <input type="password" name="pwd" id="pwd" placeholder="Eneter Password">
-                <button type="submit">Signup</button>
-            </form>
-            <p class="login_cs">If you have account, Please <a href="/auth/login">login</a> </p>
-        </div>
-        <div class="btn_cs">
-            <a href="/auth/google">
-                <img src="/img/google.svg" alt="google">
-                <p>Google</p>
-            </a>
-            <a href="/auth/github">
-                <img src="/img/github.svg" alt="github">
-                <p>Github</p>
-            </a>
-        </div>
+        <% if (message) {%>
+            <p class="signup_error">
+                <%= message %>
+            </p>
+            <% } %>
+                <div class="signup_form">
+                    <form action="/auth/signup" method="post" enctype="application/x-www-form-urlencoded">
+                        <input type="text" name="uname" id="unmae" placeholder="Eneter User">
+                        <input type="email" name="email" id="email" placeholder="Eneter Email">
+                        <input type="password" name="pwd" id="pwd" placeholder="Eneter Password">
+                        <button type="submit">Signup</button>
+                    </form>
+                    <p class="login_cs">If you have account, Please <a href="/auth/login">login</a> </p>
+                </div>
+                <div class="btn_cs">
+                    <a href="/auth/google">
+                        <img src="/img/google.svg" alt="google">
+                        <p>Google</p>
+                    </a>
+                    <a href="/auth/github">
+                        <img src="/img/github.svg" alt="github">
+                        <p>Github</p>
+                    </a>
+                </div>
     </div>
 </body>
 
