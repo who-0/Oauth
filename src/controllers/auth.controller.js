@@ -127,7 +127,7 @@ const httpRefresh = (req, res) => {
           const refreshToken = jwt.sign(result, COOKIE_KEY_R);
           res.cookie("accessToken", accessToken, { httpOnly: true });
           res.cookie("refreshToken", refreshToken, { httpOnly: true });
-          return res.redirect("/");
+          res.redirect("/");
         }
       });
     } catch (error) {
@@ -151,7 +151,7 @@ const httpLogout = (req, res) =>
     res.clearCookie("connect.sid");
     res.clearCookie("accessToken");
     res.clearCookie("refreshToken");
-    return res.render("login");
+    return res.render("login", { message: null });
   });
 
 //!module-------------

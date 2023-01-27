@@ -11,7 +11,6 @@ const httpGetProfile = async (req, res) => {
       id = req.user;
     }
     const e_user = await findById(id);
-    console.log(e_user);
     return res.render("profile", { user: e_user });
   } catch (error) {
     console.error(error);

@@ -11,12 +11,19 @@
 
 <body>
     <div class="profile_container">
-        <img src="/img/user.png" alt="user">
+        <img crossorigin="anonymous" src=<%=user.image %> alt="user">
         <div class="user_data">
-            <h1>paing sett kyaw</h1>
-            <p class="email">paing@gmail.com</p>
-            <p class="time">2023-01-25T09:43:48.313+00:00</p>
+            <h1>
+                <%= user.username %>
+            </h1>
+            <p class="email">
+                <%= user.email %>
+            </p>
+            <p class="time">
+                <%= user.createdAt %>
+            </p>
         </div>
+        <a href="/auth/logout" class="profile_logout">Logout</a>
     </div>
 </body>
 

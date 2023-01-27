@@ -1,0 +1,40 @@
+@import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Satisfy&display=swap");
+body {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.home_container {
+  background-color: rgba(166, 255, 185, 0.808);
+  border: 1px solid rgb(12, 255, 64);
+  text-align: center;
+  padding: 4%;
+}
+
+.home_container h1 {
+  font-family: "Source Code Pro", monospace;
+  text-transform: capitalize;
+}
+
+.home_container p {
+  font-family: "Satisfy", cursive;
+  font-size: 1.5rem;
+  color: rgb(32, 255, 32);
+}
+
+.home_container a {
+  text-decoration: none;
+  background-color: rgba(83, 192, 255, 0.699);
+  padding: 2% 4%;
+  color: rgb(0, 162, 255);
+  border: 1px solid rgb(0, 162, 255);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bold;
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+}

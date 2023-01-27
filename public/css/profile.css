@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Righteous&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Righteous&display=swap");
 body {
   height: 100vh;
   display: flex;
@@ -30,7 +31,8 @@ body {
 }
 
 .profile_container .user_data {
-  margin-top: 20%;
+  margin-top: 25%;
+  margin-bottom: 10%;
 }
 
 .profile_container .user_data h1 {
@@ -49,4 +51,14 @@ body {
   font-family: "Roboto Mono", monospace;
   font-weight: lighter;
   color: rgb(52, 158, 250);
+}
+
+.profile_container .profile_logout {
+  text-decoration: none;
+  background-color: red;
+  color: white;
+  padding: 2% 4%;
+  font-family: "Righteous", cursive;
+  font-size: 1.2rem;
+  letter-spacing: 1px;
 }
