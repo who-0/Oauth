@@ -1,0 +1,17 @@
+<%- include('../components/header.ejs'); -%>
+    <div class="profile_container">
+        <img crossorigin="anonymous" src=<%=user.image %> alt="user">
+        <div class="user_data">
+            <h1>
+                <%= user.username %>
+            </h1>
+            <p class="email">
+                <%= user.email %>
+            </p>
+            <p class="time">
+                <%= user.createdAt %>
+            </p>
+        </div>
+        <a href="/auth/logout" class="profile_logout">Logout</a>
+    </div>
+    <%- include('../components/footer.ejs'); -%>

@@ -33,7 +33,7 @@ function github(passport) {
           }
         } catch (error) {
           console.error(error);
-          res.render("error", {
+          res.render("pages/error", {
             message: "Plase Try again later. Our system is missing something.",
           });
         }

@@ -7,9 +7,11 @@ const {
   findUserId,
 } = require("../models/users.model");
 
-const httpGetLogin = (req, res) => res.render("login", { message: null });
+const httpGetLogin = (req, res) =>
+  res.render("pages/login", { title: "Login", message: null });
 
-const httpGetSignup = (req, res) => res.render("signup", { message: null });
+const httpGetSignup = (req, res) =>
+  res.render("pages/signup", { title: "Signup", message: null });
 
 //! Google ---------------
 const httpGoogleCallback = (req, res) => res.redirect("/");
@@ -22,13 +24,22 @@ const httpGithubCallback = (req, res) => res.redirect("/");
 const httpUserSignup = async (req, res) => {
   const user = req.body;
   if (!user) {
-    res.render("signup", { message: "Please Try again." });
+    res.render("pages/signup", {
+      title: "Signup",
+      message: "Please Try again.",
+    });
   } else if (!user.uname || !user.pwd || !user.email) {
-    res.render("signup", { message: "Missing Some input. Please all fill." });
+    res.render("pages/signup", {
+      title: "Signup",
+      message: "Missing Some input. Please all fill.",
+    });
   } else {
     const e_user = await findUserWithEmail(user.email);
     if (e_user) {
-      res.render("signup", { message: "Your already signup. Please Login " });
+      res.render("pages/signup", {
+        title: "Signup",
+        message: "Your already signup. Please Login ",
+      });
     } else {
       try {
         const hashPassword = await bcrypt.hash(user.pwd, 8);
@@ -41,7 +52,10 @@ const httpUserSignup = async (req, res) => {
         };
         const c_user = await addUser(newUser);
         if (!c_user) {
-          res.render("signup", { message: "Please Signup again." });
+          res.render("pages/signup", {
+            title: "Signup",
+            message: "Please Signup again.",
+          });
         } else {
           const accessToken = jwt.sign(
             { id: c_user.id, email: user.email },
@@ -60,7 +74,8 @@ const httpUserSignup = async (req, res) => {
         }
       } catch (error) {
         console.error(error);
-        res.render("error", {
+        res.render("pages/error", {
+          title: "Error",
           message: "Plase Try again later. Our system is missing something.",
         });
       }
@@ -73,11 +88,15 @@ const httpUserLogin = async (req, res) => {
   const { email, pwd } = req.body;
   const foundUser = await findUserWithEmail(email);
   if (!foundUser) {
-    res.render("login", {
+    res.render("pages/login", {
+      title: "Login",
       message: "Your account doesn't found in our system.",
     });
   } else if (!foundUser.password) {
-    res.render("login", { message: "You must choice correct login way!" });
+    res.render("pages/login", {
+      title: "Login",
+      message: "You must choice correct login way!",
+    });
   } else {
     try {
       const solvepwd = await bcrypt.compare(pwd, foundUser.password);
@@ -97,11 +116,12 @@ const httpUserLogin = async (req, res) => {
         res.cookie("refreshToken", refreshToken, { httpOnly: true });
         res.redirect("/");
       } else {
-        res.render("login", { message: "Your password is incorrect" });
+        res.render("pages/login", { message: "Your password is incorrect" });
       }
     } catch (error) {
       console.error(error);
-      res.render("error", {
+      res.render("pages/error", {
+        title: "Error",
         message: "Plase Try again later. Our system is missing something.",
       });
     }
@@ -112,12 +132,16 @@ const httpUserLogin = async (req, res) => {
 const httpRefresh = (req, res) => {
   const { refreshToken } = req.cookies;
   if (!refreshToken) {
-    res.render("error", { message: "Please Login again" });
+    res.render("pages/error", {
+      title: "Error",
+      message: "Please Login again",
+    });
   } else {
     try {
       jwt.verify(refreshToken, COOKIE_KEY_R, (error, result) => {
         if (error) {
-          res.render("error", {
+          res.render("pages/error", {
+            title: "Error",
             message: "Missing something. Please login again",
           });
         } else {
@@ -132,7 +156,8 @@ const httpRefresh = (req, res) => {
       });
     } catch (error) {
       console.error(error);
-      res.render("error", {
+      res.render("pages/error", {
+        title: "Error",
         message: "Plase Try again later. Our system is missing something.",
       });
     }
@@ -141,7 +166,8 @@ const httpRefresh = (req, res) => {
 
 //!----------------------------------------------------------------------
 
-const httpError = (req, res) => res.render("error", { message: "No Error" });
+const httpError = (req, res) =>
+  res.render("pages/error", { title: "Error", message: "No Error" });
 
 const httpLogout = (req, res) =>
   req.logout(function (err) {
@@ -151,7 +177,7 @@ const httpLogout = (req, res) =>
     res.clearCookie("connect.sid");
     res.clearCookie("accessToken");
     res.clearCookie("refreshToken");
-    return res.render("login", { message: null });
+    return res.render("pages/login", { title: "Login", message: null });
   });
 
 //!module-------------

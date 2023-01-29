@@ -11,10 +11,11 @@ const httpGetProfile = async (req, res) => {
       id = req.user;
     }
     const e_user = await findById(id);
-    return res.render("profile", { user: e_user });
+    return res.render("pages/profile", { title: "Profile", user: e_user });
   } catch (error) {
     console.error(error);
-    res.render("error", {
+    res.render("pages/error", {
+      title: "Error",
       message: "Plase Try again later. Our system is missing something.",
     });
   }

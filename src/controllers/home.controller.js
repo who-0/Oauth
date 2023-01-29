@@ -10,10 +10,10 @@ const httpGetHome = async (req, res) => {
     id = req.user;
   }
   const user = await findById(id);
-  res.render("home", { username: user.username });
+  res.render("pages/home", { title: "Home", username: user.username });
 };
-const httpCookie = (req, res) => res.render("cookie");
-const httpPrivacy = (req, res) => res.render("privacy");
+const httpCookie = (req, res) => res.render("pages/cookie");
+const httpPrivacy = (req, res) => res.render("pages/privacy");
 
 module.exports = {
   httpGetHome,
