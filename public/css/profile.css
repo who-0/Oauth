@@ -18,6 +18,7 @@ body {
   text-align: center;
   padding: 3% 3%;
   position: relative;
+  transition: all 0.2s;
 }
 
 .profile_container img {
@@ -61,4 +62,10 @@ body {
   font-family: "Righteous", cursive;
   font-size: 1.2rem;
   letter-spacing: 1px;
+  transition: all 0.2s;
+}
+
+.profile_container .profile_logout:hover {
+  background-color: lightcoral;
+  color: red;
 }
