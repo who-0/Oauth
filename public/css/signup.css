@@ -58,14 +58,25 @@ body {
   font-family: "Roboto Mono", monospace;
 }
 
+.signup_container .signup_form form input:focus {
+  border-bottom: 1px solid red;
+}
+
 .signup_container .signup_form form button {
   height: 45px;
   font-size: 1.2rem;
   letter-spacing: 1px;
   font-family: "Roboto Mono", monospace;
   border: none;
+  cursor: pointer;
   color: white;
   background-color: rgb(65, 223, 65);
+  transition: all 0.2s;
+}
+
+.signup_container .signup_form form button:hover {
+  background-color: rgb(185, 247, 185);
+  color: black;
 }
 
 .signup_container .signup_form .login_cs {
@@ -89,6 +100,50 @@ body {
   color: black;
   font-family: "DM Sans", sans-serif;
   border: 1px solid black;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.1s;
+}
+
+.signup_container .btn_cs a::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgb(255, 255, 255);
+  height: 100%;
+  width: 15%;
+  transform: skewX(-10deg) translateX(-120%);
+}
+
+.signup_container .btn_cs a:hover {
+  border: 1px solid rgb(45, 238, 50);
+  background: rgb(45, 238, 50);
+  background: linear-gradient(
+    0deg,
+    rgba(45, 238, 50, 1) 55%,
+    rgba(172, 245, 182, 0.8295693277310925) 99%
+  );
+  box-shadow: 0 5px 5px rgb(82, 82, 82);
+  color: white;
+}
+
+.signup_container .btn_cs a:hover::after {
+  animation: buttonAni 0.5s linear 1;
+}
+
+@keyframes buttonAni {
+  from {
+    transform: skewX(-10deg) translateX(-120%);
+  }
+  to {
+    transform: skewX(-10deg) translateX(700%);
+  }
+}
+
+.signup_container .btn_cs a:active {
+  box-shadow: 0 2px 2px rgb(82, 82, 82);
+  transform: translateY(3px);
 }
 
 .signup_container .btn_cs img {

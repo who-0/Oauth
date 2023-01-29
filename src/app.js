@@ -19,8 +19,8 @@ app.set("views", path.join(__dirname, "..", "views"));
 app.use(bdparser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "..", "public")));
 app.use(
-  cors({ origin: "https://oauth-h3cg.onrender.com", methods: ["get", "post"] })
-  // cors({ origin: "http://localhost:3000", methods: ["get", "post"] })
+  // cors({ origin: "https://oauth-h3cg.onrender.com", methods: ["get", "post"] })
+  cors({ origin: "http://localhost:3000", methods: ["get", "post"] })
 );
 app.use(express.json());
 app.use(morgan("tiny"));
